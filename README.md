@@ -1,2 +1,0 @@
-# cipy
-Python CI Monytor
