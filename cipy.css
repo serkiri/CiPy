@@ -11,3 +11,18 @@
 .green {
     color: green;
 }
+
+.subBuild {
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.build {
+    margin: 0px;
+}
+
+ul.subBuilds {
+    margin: 0px;
+    list-style-type: none;
+}
+

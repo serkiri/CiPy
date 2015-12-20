@@ -38,16 +38,25 @@ class DataProvider():
     def getData(self):
         outputJobs = []
         for configJob in config.jobs:
-            jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,actions[parameters[name,value]],result]')
+            jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,actions[parameters[name,value]],subBuilds[buildNumber,result,building,jobName,url]]')
             convertedJob = {}
             convertedJob['name'] = configJob['cipyPrettyName']
             for jenkinsBuild in jenkinsJob['builds']:
                 if 'parameters' in configJob and not self.actionParametersMatch(jenkinsBuild['actions'], configJob['parameters']):
                     continue
-                if not 'result' in jenkinsBuild or jenkinsBuild['result'] == None:
+                if jenkinsBuild['building'] == True:
                     continue
                 convertedJob['number'] = jenkinsBuild['number']
                 convertedJob['result'] = self.converStatus(jenkinsBuild['result'])
+                if 'subBuilds' in configJob:
+                    convertedJob['subBuilds'] = []
+                    for jenkinsSubBuild in jenkinsBuild['subBuilds']:
+                        if jenkinsSubBuild['jobName'] in configJob['subBuilds']:
+                            convertedSubBuild = {}
+                            convertedSubBuild['name'] = jenkinsSubBuild['jobName']
+                            convertedSubBuild['number'] = jenkinsSubBuild['buildNumber']
+                            convertedSubBuild['result'] = self.converStatus(jenkinsSubBuild['result'])
+                            convertedJob['subBuilds'].append(convertedSubBuild)
                 break
             outputJobs.append(convertedJob)
         return outputJobs
