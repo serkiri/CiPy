@@ -52,14 +52,19 @@ class DataProvider():
                 convertedJob['url'] = jenkinsBuild['url']
                 if 'subBuilds' in configJob:
                     convertedJob['subBuilds'] = []
-                    for jenkinsSubBuild in jenkinsBuild['subBuilds']:
-                        if jenkinsSubBuild['jobName'] in configJob['subBuilds']:
-                            convertedSubBuild = {}
-                            convertedSubBuild['name'] = jenkinsSubBuild['jobName']
-                            convertedSubBuild['number'] = jenkinsSubBuild['buildNumber']
-                            convertedSubBuild['result'] = self.converStatus(jenkinsSubBuild['result'])
-                            convertedSubBuild['url'] = config.jenkins_url + jenkinsSubBuild['url']
-                            convertedJob['subBuilds'].append(convertedSubBuild)
+                    for configSubBuild in configJob['subBuilds']:
+                        convertedSubBuild = {}
+                        convertedSubBuild['name'] = configSubBuild['cipyPrettyName']
+                        convertedSubBuild['number'] = ''
+                        convertedSubBuild['result'] = 'GRAY'
+                        convertedSubBuild['url'] = ''
+                        for jenkinsSubBuild in jenkinsBuild['subBuilds']:
+                            if jenkinsSubBuild['jobName'] == configSubBuild['jobName']:
+                                convertedSubBuild['number'] = jenkinsSubBuild['buildNumber']
+                                convertedSubBuild['result'] = self.converStatus(jenkinsSubBuild['result'])
+                                convertedSubBuild['url'] = config.jenkins_url + jenkinsSubBuild['url']
+                                break
+                        convertedJob['subBuilds'].append(convertedSubBuild)
                 break
             outputJobs.append(convertedJob)
         return outputJobs

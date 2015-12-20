@@ -6,9 +6,18 @@ jobs = [
         'url' : jenkins_url + 'job/Cloudshop_Aat_MultiJob/',
         'parameters': {'name': 'FEATURE_SET', 'value': 'prodfeatures'},
         'subBuilds': [
-            'Cloudshop_Deploy',
-            'Cloudshop_Bdd',
-            'Cloudshop_Ui_MultiJob',
+            {
+                'cipyPrettyName': 'AAT Deploy',
+                'jobName': 'Cloudshop_Deploy',
+            },
+            {
+                'cipyPrettyName': 'AAT BDD Tests',
+                'jobName': 'Cloudshop_Bdd',
+            },
+            {
+                'cipyPrettyName': 'AAT UI Tests',
+                'jobName':'Cloudshop_Ui_MultiJob',
+            },
         ]
     },
     {
@@ -16,9 +25,18 @@ jobs = [
         'url' : jenkins_url + 'job/Cloudshop_Aat_MultiJob/',
         'parameters': {'name': 'FEATURE_SET', 'value': 'allfeatures'},
         'subBuilds': [
-            'Cloudshop_Deploy',
-            'Cloudshop_Bdd',
-            'Cloudshop_Ui_MultiJob',
+            {
+                'cipyPrettyName': 'AAT Deploy',
+                'jobName': 'Cloudshop_Deploy',
+            },
+            {
+                'cipyPrettyName': 'AAT BDD Tests',
+                'jobName': 'Cloudshop_Bdd',
+            },
+            {
+                'cipyPrettyName': 'AAT UI Tests',
+                'jobName':'Cloudshop_Ui_MultiJob',
+            },
         ]
     },
     {
