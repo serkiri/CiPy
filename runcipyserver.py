@@ -23,11 +23,12 @@ class CipyHandler(BaseHTTPRequestHandler):
             filename = self.path[1:]
             cwd = os.getcwd()
             fullFileName = os.path.join(cwd, filename)
-            with open(fullFileName) as f:
+            with open(fullFileName,'rb') as f:
                 self.send_response(200)
                 self.send_header('Content-type', types_map[ext])
                 self.end_headers()
                 self.wfile.write(f.read())
+                f.close()
             return
         except IOError:
             self.send_error(404)

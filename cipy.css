@@ -29,3 +29,10 @@
 .build a {
     text-decoration: none
 }
+
+body { 
+    background-image: url('tree.gif');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: right bottom; 
+}
