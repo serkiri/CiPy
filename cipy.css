@@ -21,8 +21,11 @@
     margin: 0px;
 }
 
-ul.subBuilds {
+.subBuilds {
     margin: 0px;
     list-style-type: none;
 }
 
+.build a {
+    text-decoration: none
+}

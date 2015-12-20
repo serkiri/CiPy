@@ -38,7 +38,7 @@ class DataProvider():
     def getData(self):
         outputJobs = []
         for configJob in config.jobs:
-            jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,actions[parameters[name,value]],subBuilds[buildNumber,result,building,jobName,url]]')
+            jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,url,actions[parameters[name,value]],subBuilds[buildNumber,result,building,jobName,url]]')
             convertedJob = {}
             convertedJob['name'] = configJob['cipyPrettyName']
             for jenkinsBuild in jenkinsJob['builds']:
@@ -48,6 +48,7 @@ class DataProvider():
                     continue
                 convertedJob['number'] = jenkinsBuild['number']
                 convertedJob['result'] = self.converStatus(jenkinsBuild['result'])
+                convertedJob['url'] = jenkinsBuild['url']
                 if 'subBuilds' in configJob:
                     convertedJob['subBuilds'] = []
                     for jenkinsSubBuild in jenkinsBuild['subBuilds']:
@@ -56,6 +57,7 @@ class DataProvider():
                             convertedSubBuild['name'] = jenkinsSubBuild['jobName']
                             convertedSubBuild['number'] = jenkinsSubBuild['buildNumber']
                             convertedSubBuild['result'] = self.converStatus(jenkinsSubBuild['result'])
+                            convertedSubBuild['url'] = config.jenkins_url + jenkinsSubBuild['url']
                             convertedJob['subBuilds'].append(convertedSubBuild)
                 break
             outputJobs.append(convertedJob)
