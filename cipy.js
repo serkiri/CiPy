@@ -19,7 +19,9 @@ function onGetDataDone(data){
     $("#content").html('');
     jobs = $.parseJSON(data);
     $.each(jobs, function(index, job){
-        $("#content").append('<p style="color:' + job['result'] +' ">' + job['name'] + ' ' + job['number'] + ' ' + job['result'] + '</p>');
+        $('<p>' + job['name'] + ' ' + job['number'] + ' ' + job['result'] + '</p>')
+        .addClass(job['result'])
+        .appendTo("#content");
     });
 }
 
