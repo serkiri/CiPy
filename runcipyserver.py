@@ -89,5 +89,5 @@ if __name__ == '__main__':
     
 
     from BaseHTTPServer import HTTPServer
-    server = HTTPServer(('localhost', 8000), CipyHandler)
+    server = HTTPServer(('', 8000), CipyHandler)
     server.serve_forever()
