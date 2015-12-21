@@ -7,6 +7,8 @@ import ast
 import urllib
 import config
 import json
+import threading
+import time
 
 class CipyHandler(BaseHTTPRequestHandler):
     
@@ -17,7 +19,8 @@ class CipyHandler(BaseHTTPRequestHandler):
             if self.path.startswith('/getdata'):
                 self.send_response(200)
                 self.end_headers()
-                self.wfile.write(json.dumps(DataProvider().getData()))
+                global current_data
+                self.wfile.write(current_data)
                 return
             fname,ext = os.path.splitext(self.path)
             filename = self.path[1:]
@@ -88,13 +91,22 @@ class DataProvider():
                 return True
         return False
 
+current_jenkins_data = ''
    
+def jenkins_updater():
+    print 'Update data from jenkins'
+    global current_data 
+    current_data = json.dumps(DataProvider().getData())
+    t = threading.Timer(15.0, jenkins_updater)
+    t.start()
+    return    
+
     
- 
 if __name__ == '__main__':
     print ('starting cipy server')
     print (sys.version)
-    
+
+    jenkins_updater()
 
     from BaseHTTPServer import HTTPServer
     server = HTTPServer(('', 8000), CipyHandler)
