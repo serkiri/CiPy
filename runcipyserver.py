@@ -102,6 +102,8 @@ class DataProvider():
             newProgress = self.calculateProgress(jenkinsBuild['timestamp'], jenkinsBuild['estimatedDuration'])
             if newProgress > progress:
                 progress = newProgress
+        if progress > 100:
+            progress = 100
         if progress > -1:
             convertedJob['progress'] = str(progress) + '%'
     
