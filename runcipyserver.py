@@ -19,8 +19,8 @@ class CipyHandler(BaseHTTPRequestHandler):
             if self.path.startswith('/getdata'):
                 self.send_response(200)
                 self.end_headers()
-                global current_data
-                self.wfile.write(current_data)
+                global current_jenkins_data
+                self.wfile.write(current_jenkins_data)
                 return
             fname,ext = os.path.splitext(self.path)
             filename = self.path[1:]
@@ -42,7 +42,7 @@ class DataProvider():
     def getData(self):
         outputJobs = []
         for configJob in config.jobs:
-            jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,url,actions[parameters[name,value]],subBuilds[buildNumber,result,building,jobName,url]]')
+            jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,url,estimatedDuration,timestamp,actions[parameters[name,value]],subBuilds[buildNumber,result,building,jobName,url]]')
             convertedJob = {}
             convertedJob['name'] = configJob['cipyPrettyName']
             for jenkinsBuild in jenkinsJob['builds']:
@@ -68,6 +68,7 @@ class DataProvider():
                                 convertedSubBuild['url'] = config.jenkins_url + jenkinsSubBuild['url']
                                 break
                         convertedJob['subBuilds'].append(convertedSubBuild)
+                self.addInprogressInformationToBuild(configJob, jenkinsJob, convertedJob)
                 break
             outputJobs.append(convertedJob)
         return outputJobs
@@ -90,13 +91,29 @@ class DataProvider():
             if 'parameters' in action and configParameters in action['parameters']:
                 return True
         return False
+        
+    def addInprogressInformationToBuild(self, configJob, jenkinsJob, convertedJob):
+        progress = -1
+        for jenkinsBuild in jenkinsJob['builds']:
+            if 'parameters' in configJob and not self.actionParametersMatch(jenkinsBuild['actions'], configJob['parameters']):
+                continue
+            if jenkinsBuild['building'] == False:
+                continue
+            newProgress = self.calculateProgress(jenkinsBuild['timestamp'], jenkinsBuild['estimatedDuration'])
+            if newProgress > progress:
+                progress = newProgress
+        if progress > -1:
+            convertedJob['progress'] = str(progress) + '%'
+    
+    def calculateProgress(self, timestamp, estimatedDuration):
+        return round((time.time()*1000 - timestamp) * 100 / estimatedDuration, 2)
 
 current_jenkins_data = ''
    
 def jenkins_updater():
     print 'Update data from jenkins'
-    global current_data 
-    current_data = json.dumps(DataProvider().getData())
+    global current_jenkins_data 
+    current_jenkins_data = json.dumps(DataProvider().getData())
     t = threading.Timer(15.0, jenkins_updater)
     t.start()
     return    
