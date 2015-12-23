@@ -5,33 +5,70 @@
 }
 
 .red {
-    color: red;
+    color: white;
+    background-color: darkred;
 }
 
 .green {
-    color: green;
+    color: white;
+    background-color: darkgreen;
 }
 
 .gray {
-    color: gray;
+    color: white;
+    background-color: gray;
+}
+
+
+.build {
+    margin: 10px;
+    padding: 10px;
+    border-style: solid;
+    border-radius: 20px;
+}
+
+.subBuilds {
+    margin: 10px;
+    display:block;
+    text-align: center;
 }
 
 .subBuild {
     font-size: 40px;
     font-weight: 400;
-}
-
-.build {
-    margin: 0px;
-}
-
-.subBuilds {
-    margin: 0px;
-    list-style-type: none;
+    padding: 10px;
+    margin: 10px;
+    border-style: solid;
+    border-radius: 20px;
+    display:inline-block;
 }
 
 .build a {
-    text-decoration: none
+    text-decoration: none;
+    margin: 10px;
+}
+
+.progress {
+    width: 0%;
+    display: inline;
+    z-index: 0;
+    position: absolute;
+    opacity: 0.5;
+    border-radius: 20px;
+}
+
+.progress.red{
+    background-color: red;
+    color: red;
+}
+
+.progress.green{
+    background-color: green;
+    color: green;
+}
+
+.buildContent {
+    text-align: center;
 }
 
 body { 

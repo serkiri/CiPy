@@ -17,20 +17,25 @@ function onGetDataDone(data){
     jobs = $.parseJSON(data);
 //    $("#content").html(data);
     $.each(jobs, function(index, job){
-        build = $('<p>' + '<a href="' + job['url'] + '">' + job['name'] + ' ' + job['number'] + ' ' + (job['progress'] ? job['progress'] : '') + '</a></p>');
-        build.addClass(job['result']).addClass('build');
+        build = $('<div class="build"><div class="progress"><span>.</span></div><div class="buildContent">' + '<a href="' + job['url'] + '">' + job['name'] + ' ' + job['number'] + ' ' + (job['progress'] ? job['progress'] : '') + '</a></div></div>');
+        build.addClass(job['result']);
         build.find("a").addClass(job['result']);
+        build.find(".progress").addClass(job['result'])
+        if (job['progress']){
+            build.find(".progress").width(job['progress']);
+        } else {
+            build.find(".progress span").remove();
+        }
         $("#content").append(build);
         
         if(job['subBuilds']){
-            subBuilds = $('<ul class="subBuilds"></ul>');
+            subBuilds = $('<div class="subBuilds"></div>');
             $.each(job['subBuilds'], function(index2, subJob){
-                subBuild = $('<li><a href="' + subJob['url'] + '">' + subJob['name'] + ' ' + subJob['number'] +'</a></li>');
-                subBuild.addClass(subJob['result']).addClass('subBuild');
-                subBuild.find("a").addClass(subJob['result']);
+                subBuild = $('<a class="subBuild" href="' + subJob['url'] + '">' + subJob['name'] + ' ' + subJob['number'] +'</a>');
+                subBuild.addClass(subJob['result'])
                 subBuilds.append(subBuild);
             });
-            build.append(subBuilds);
+            build.find('.buildContent').append(subBuilds);
         }
     });
 }
