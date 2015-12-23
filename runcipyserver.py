@@ -115,9 +115,9 @@ current_jenkins_data = ''
 def jenkins_updater():
     print 'Update data from jenkins'
     global current_jenkins_data 
-    current_jenkins_data = json.dumps(DataProvider().getData())
     t = threading.Timer(15.0, jenkins_updater)
     t.start()
+    current_jenkins_data = json.dumps(DataProvider().getData())
     return    
 
     
