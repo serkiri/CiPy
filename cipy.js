@@ -17,7 +17,7 @@ function onGetDataDone(data){
     jobs = $.parseJSON(data);
 //    $("#content").html(data);
     $.each(jobs, function(index, job){
-        build = $('<div class="build"><div class="progress"><span>.</span></div><div class="buildContent">' + '<a href="' + job['url'] + '">' + job['name'] + ' ' + job['number'] + ' ' + (job['progress'] ? job['progress'] : '') + '</a></div></div>');
+        build = $('<div class="build"><div class="progress"><span>.</span></div><div class="buildContent">' + '<a href="' + job['url'] + '">' + job['name'] + ' ' + job['number'] + '</a></div></div>');
         build.addClass(job['result']);
         build.find("a").addClass(job['result']);
         build.find(".progress").addClass(job['result'])
