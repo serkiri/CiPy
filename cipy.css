@@ -22,7 +22,6 @@
 
 .build {
     margin: 10px;
-    padding: 10px;
     border-style: solid;
     border-radius: 20px;
 }
@@ -45,7 +44,8 @@
 
 .build a {
     text-decoration: none;
-    margin: 10px;
+    margin: 0px;
+    margin-left: 10px;
 }
 
 .progress {
