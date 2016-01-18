@@ -1,4 +1,4 @@
-jenkins_url = 'http://jenkins.pipe.tp.test01.aws.travisperkins.com:8080/'
+jenkins_url = 'http://jenkins.pipe.cps.test01.aws.travisperkins.com:8080/'
 
 jobs = [
     {
@@ -6,9 +6,8 @@ jobs = [
         'url' : 'http://jenkins.pipe.cloudshop.test01.aws.travisperkins.com:8080/job/Cloudshop_Unit_Test_And_Sonar/',
     },
     {
-        'cipyPrettyName' : 'AAT allfeatures',
+        'cipyPrettyName' : 'AAT CPS',
         'url' : jenkins_url + 'job/Cloudshop_Aat_MultiJob/',
-        'parameters': {'name': 'FEATURE_SET', 'value': 'allfeatures'},
         'subBuilds': [
             {
                 'cipyPrettyName': 'AAT Deploy',
@@ -25,26 +24,7 @@ jobs = [
         ]
     },
     {
-        'cipyPrettyName' : 'AAT prodfeatures',
-        'url' : jenkins_url + 'job/Cloudshop_Aat_MultiJob/',
-        'parameters': {'name': 'FEATURE_SET', 'value': 'prodfeatures'},
-        'subBuilds': [
-            {
-                'cipyPrettyName': 'AAT Deploy',
-                'jobName': 'Cloudshop_Deploy',
-            },
-            {
-                'cipyPrettyName': 'AAT BDD Tests',
-                'jobName': 'Cloudshop_Bdd',
-            },
-            {
-                'cipyPrettyName': 'AAT UI Tests',
-                'jobName':'Cloudshop_UI_MultiJob',
-            },
-        ]
-    },
-    {
-        'cipyPrettyName' : 'SIT',
+        'cipyPrettyName' : 'SIT CPS',
         'url' : jenkins_url + 'job/Cloudshop_Sit_MultiJob/',
         'subBuilds': [
             {
@@ -60,5 +40,9 @@ jobs = [
                 'jobName':'Cloudshop_UI_MultiJob',
             },
         ]
+    },
+    {
+        'cipyPrettyName' : 'UAT CPS Deploy',
+        'url' : jenkins_url + 'job/Cloudshop_Deploy_Uat/',
     },
 ]
