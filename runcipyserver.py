@@ -105,7 +105,7 @@ class DataProvider():
         if progress > 100:
             progress = 100
         if progress > -1:
-            convertedJob['progress'] = str(progress) + '%'
+            convertedJob['progress'] = str(progress)
     
     def calculateProgress(self, timestamp, estimatedDuration):
         return round((time.time()*1000 - timestamp) * 100 / estimatedDuration, 2)

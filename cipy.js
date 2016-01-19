@@ -20,13 +20,13 @@ function onGetDataDone(data){
         build = $('<div class="build"><div class="progress"><span>.</span></div><div class="buildContent">' + '<a href="' + job['url'] + '">' + job['name'] + ' ' + job['number'] + '</a></div></div>');
         build.addClass(job['result']);
         build.find("a").addClass(job['result']);
-        build.find(".progress").addClass(job['result'])
+        build.find(".progress").addClass(job['result']);
+        $("#content").append(build);
         if (job['progress']){
-            build.find(".progress").width(job['progress']);
+            build.find(".progress").width(build.width() * job['progress'] / 100);
         } else {
             build.find(".progress span").remove();
         }
-        $("#content").append(build);
         
         if(job['subBuilds']){
             subBuilds = $('<div class="subBuilds"></div>');
