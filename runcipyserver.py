@@ -71,11 +71,13 @@ class DataProvider():
                 self.addInprogressInformationToBuild(configJob, jenkinsJob, convertedJob)
                 break
             outputJobs.append(convertedJob)
-        return outputJobs
+        result = {}
+        result['cipyVersion'] = cipyVersion;
+        result['jobs'] = outputJobs;
+        return result
 
     def fetchJob(self, joburl):
             responceFile = urllib.urlopen(joburl)
-#            responceFile = open('d:\cipy\examples\jenk.py', 'r')
             responceRaw = responceFile.read()
             responce = ast.literal_eval(responceRaw)
             return responce
@@ -124,9 +126,11 @@ def jenkins_updater():
 if __name__ == '__main__':
     print ('starting cipy server')
     print (sys.version)
+    
+    cipyVersion = "2.7"
 
     jenkins_updater()
 
     from BaseHTTPServer import HTTPServer
-    server = HTTPServer(('', 8000), CipyHandler)
+    server = HTTPServer(('', config.cipyPort), CipyHandler)
     server.serve_forever()

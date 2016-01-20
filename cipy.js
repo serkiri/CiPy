@@ -14,8 +14,11 @@ function refresh(){
 
 function onGetDataDone(data){
     $("#content").html('');
-    jobs = $.parseJSON(data);
-//    $("#content").html(data);
+    responce = $.parseJSON(data);
+    if($('.cipyVersion').text() != responce['cipyVersion']){
+        location.reload();
+    }
+    jobs = responce['jobs']
     $.each(jobs, function(index, job){
         build = $('<div class="build"><div class="progress"><span>.</span></div><div class="buildContent">' + '<a href="' + job['url'] + '">' + job['name'] + ' ' + job['number'] + '</a></div></div>');
         build.addClass(job['result']);

@@ -1,3 +1,5 @@
+cipyPort = 8000
+
 jenkins_url = 'http://jenkins.pipe.tp.test01.aws.travisperkins.com:8080/'
 
 jobs = [
