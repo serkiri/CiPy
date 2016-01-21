@@ -59,7 +59,7 @@ jobs = [
             },
             {
                 'cipyPrettyName': 'SIT UI Tests',
-                'jobName':'Cloudshop_UI_MultiJob',
+                'jobName':'Cloudshop_Ui_MultiJob',
             },
         ]
     },
