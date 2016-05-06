@@ -89,7 +89,7 @@ class DataProvider():
             return 'RED'
     
     def actionParametersMatch(self, jenkinsActions, configParameters):
-        return all(x in jenkinsActions for x in configParameters.values())
+        return all(paramValue in jenkinsActions for paramValue in configParameters.values())
         
     def addInprogressInformationToBuild(self, configJob, jenkinsJob, convertedJob):
         progress = -1
