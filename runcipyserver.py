@@ -42,7 +42,11 @@ class DataProvider():
     def getData(self):
         outputJobs = []
         for configJob in config.jobs:
-            jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,url,estimatedDuration,timestamp,displayName,subBuilds[buildNumber,result,building,jobName,url]]')
+            try:
+                jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,url,estimatedDuration,timestamp,displayName,subBuilds[buildNumber,result,building,jobName,url]]')
+            except IOError:
+                continue
+            
             convertedJob = {}
             convertedJob['name'] = configJob['cipyPrettyName']
             for jenkinsBuild in jenkinsJob['builds']:
@@ -124,7 +128,7 @@ if __name__ == '__main__':
     print ('starting cipy server')
     print (sys.version)
     
-    cipyVersion = "2.20"
+    cipyVersion = "2.21"
 
     jenkins_updater()
 
