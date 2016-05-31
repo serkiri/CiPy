@@ -44,7 +44,7 @@ class DataProvider():
         for configJob in config.jobs:
             try:
                 jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,url,estimatedDuration,timestamp,displayName,subBuilds[buildNumber,result,building,jobName,url]]')
-            except IOError:
+            except:
                 continue
             
             convertedJob = {}
@@ -128,7 +128,7 @@ if __name__ == '__main__':
     print ('starting cipy server')
     print (sys.version)
     
-    cipyVersion = "2.21"
+    cipyVersion = "2.22"
 
     jenkins_updater()
 
