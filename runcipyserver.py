@@ -43,7 +43,7 @@ class DataProvider():
         outputJobs = []
         for configJob in config.jobs:
             try:
-                jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,url,estimatedDuration,timestamp,displayName,subBuilds[buildNumber,result,building,jobName,url]]')
+                jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,url,estimatedDuration,timestamp,displayName,subBuilds[buildNumber,result,building,jobName,url,phaseName]]')
             except:
                 continue
             
@@ -67,6 +67,8 @@ class DataProvider():
                         convertedSubBuild['url'] = ''
                         for jenkinsSubBuild in jenkinsBuild['subBuilds']:
                             if jenkinsSubBuild['jobName'] == configSubBuild['jobName']:
+                                if 'phase' in configSubBuild and not (configSubBuild['phase'] in jenkinsSubBuild['phaseName'] ):
+                                    continue
                                 convertedSubBuild['number'] = jenkinsSubBuild['buildNumber']
                                 convertedSubBuild['result'] = self.converStatus(jenkinsSubBuild['result'])
                                 convertedSubBuild['url'] = config.jenkins_url + jenkinsSubBuild['url']
@@ -128,7 +130,7 @@ if __name__ == '__main__':
     print ('starting cipy server')
     print (sys.version)
     
-    cipyVersion = "2.24"
+    cipyVersion = "2.25"
 
     jenkins_updater()
 
