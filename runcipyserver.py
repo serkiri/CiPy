@@ -9,6 +9,7 @@ import config
 import json
 import threading
 import time
+import datetime
 
 class CipyHandler(BaseHTTPRequestHandler):
     
@@ -43,7 +44,7 @@ class DataProvider():
         outputJobs = []
         for configJob in config.jobs:
             try:
-                jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,url,estimatedDuration,timestamp,displayName,subBuilds[buildNumber,result,building,jobName,url,phaseName]]')
+                jenkinsJob = self.fetchJob(configJob['url'] + '/api/python?tree=name,builds[number,result,building,url,estimatedDuration,timestamp,duration,displayName,subBuilds[buildNumber,result,building,jobName,url,phaseName]]')
             except:
                 continue
             
@@ -57,6 +58,7 @@ class DataProvider():
                 convertedJob['number'] = jenkinsBuild['number']
                 convertedJob['result'] = self.converStatus(jenkinsBuild['result'])
                 convertedJob['url'] = jenkinsBuild['url']
+                convertedJob['age'] = self.calculateBuildAge(jenkinsBuild['timestamp'], jenkinsBuild['duration'])
                 if 'subBuilds' in configJob:
                     convertedJob['subBuilds'] = []
                     for configSubBuild in configJob['subBuilds']:
@@ -115,6 +117,15 @@ class DataProvider():
     def calculateProgress(self, timestamp, estimatedDuration):
         return round((time.time()*1000 - timestamp) * 100 / estimatedDuration, 2)
 
+    def calculateBuildAge(self, timestamp, duration):
+        mins = int((time.time()*1000 - timestamp - duration)/1000/60)
+        days = int(mins/60/24)
+        mins = mins - days*60*24
+        hours = int(mins/60)
+        mins = mins - hours*60
+        age = (str(days) + 'd ' if days > 0 else '') + (str(hours) + 'h ' if hours > 0 else '') + str(mins) + 'm'
+        return age
+
 current_jenkins_data = ''
    
 def jenkins_updater():
@@ -130,7 +141,7 @@ if __name__ == '__main__':
     print ('starting cipy server')
     print (sys.version)
     
-    cipyVersion = "2.25"
+    cipyVersion = "2.26"
 
     jenkins_updater()
 

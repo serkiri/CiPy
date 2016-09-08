@@ -71,6 +71,11 @@
     text-align: center;
 }
 
+.buildAge {
+    float: right;
+    font-size: 30;
+}
+
 body { 
     background-repeat: no-repeat;
     background-attachment: fixed;

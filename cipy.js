@@ -20,7 +20,7 @@ function onGetDataDone(data){
     }
     jobs = responce['jobs']
     $.each(jobs, function(index, job){
-        build = $('<div class="build"><div class="progress"><span>.</span></div><div class="buildContent">' + '<a href="' + job['url'] + '">' + job['name'] + ' ' + job['number'] + '</a></div></div>');
+        build = $('<div class="build"><div class="progress"><span>.</span></div><div class="buildContent">' + '<a href="' + job['url'] + '">' + job['name'] + ' ' + job['number'] + '</a><span class="buildAge">' + job['age'] + '</span></div></div>');
         build.addClass(job['result']);
         build.find("a").addClass(job['result']);
         build.find(".progress").addClass(job['result']);
