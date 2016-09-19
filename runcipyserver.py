@@ -141,7 +141,7 @@ if __name__ == '__main__':
     print ('starting cipy server')
     print (sys.version)
     
-    cipyVersion = "2.27"
+    cipyVersion = "2.28"
 
     jenkins_updater()
 
