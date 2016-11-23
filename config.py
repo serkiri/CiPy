@@ -94,7 +94,7 @@ jobs = [
         ]
     },
     {
-        'cipyPrettyName' : 'TP Code Freeze',
+        'cipyPrettyName' : 'Code Freeze',
         'url' : 'http://epuakhaw0482t1.kyiv.epam.com:8080/job/codeFreeze/',
     },
 ]
