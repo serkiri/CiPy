@@ -58,7 +58,7 @@ jobs = [
         ]
     },
     {
-        'cipyPrettyName' : 'AAT CPS',
+        'cipyPrettyName' : 'AAT CPS prod',
         'url' : jenkins_url_cps + 'job/Cloudshop_Aat_MultiJob/',
         'parameters': {'name': 'FEATURE_SET', 'value': 'prodfeatures'},
         'subBuilds': [
