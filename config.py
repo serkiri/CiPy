@@ -67,8 +67,14 @@ jobs = [
                 'jobName': 'Cloudshop_Deploy',
             },
             {
-                'cipyPrettyName': 'AAT BDD Tests',
+                'cipyPrettyName': 'AAT BDD',
                 'jobName': 'Cloudshop_Bdd',
+                'phase': 'Parallel',
+            },
+            {
+                'cipyPrettyName': 'AAT BDD Serial',
+                'jobName': 'Cloudshop_Bdd',
+                'phase': 'Serial',
             },
             {
                 'cipyPrettyName': 'AAT UI Tests',
@@ -85,8 +91,14 @@ jobs = [
                 'jobName': 'Cloudshop_Deploy',
             },
             {
-                'cipyPrettyName': 'SIT BDD Tests',
+                'cipyPrettyName': 'SIT BDD',
                 'jobName': 'Cloudshop_Bdd',
+                'phase': 'Parallel',
+            },
+            {
+                'cipyPrettyName': 'SIT BDD Serial',
+                'jobName': 'Cloudshop_Bdd',
+                'phase': 'Serial',
             },
             {
                 'cipyPrettyName': 'SIT UI Tests',
