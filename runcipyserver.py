@@ -5,6 +5,7 @@ import os
 from mimetypes import types_map
 import ast
 import urllib
+from urlparse import urlparse
 import config
 import json
 import threading
@@ -73,7 +74,8 @@ class DataProvider():
                                     continue
                                 convertedSubBuild['number'] = jenkinsSubBuild['buildNumber']
                                 convertedSubBuild['result'] = self.converStatus(jenkinsSubBuild['result'])
-                                convertedSubBuild['url'] = config.jenkins_url + jenkinsSubBuild['url']
+                                build_url = urlparse(jenkinsBuild['url'])
+                                convertedSubBuild['url'] = build_url.scheme + "://" + build_url.netloc + "/" + jenkinsSubBuild['url']
                                 break
                         convertedJob['subBuilds'].append(convertedSubBuild)
                 self.addInprogressInformationToBuild(configJob, jenkinsJob, convertedJob)
@@ -141,7 +143,7 @@ if __name__ == '__main__':
     print ('starting cipy server')
     print (sys.version)
     
-    cipyVersion = "2.41"
+    cipyVersion = "2.42"
 
     jenkins_updater()
 
