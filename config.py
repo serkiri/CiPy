@@ -108,6 +108,6 @@ jobs = [
     },
     {
         'cipyPrettyName' : 'Code Freeze',
-        'url' : 'http://epuakhaw0482t1.kyiv.epam.com:8080/job/codeFreeze/',
+        'url' : 'http://epuakhaw0602.kyiv.epam.com:8080/job/b2bCodeFreeze/',
     },
 ]
