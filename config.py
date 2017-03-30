@@ -1,12 +1,12 @@
 cipyPort = 8000
 
-jenkins_url = 'http://jenkins.pipe.tp.test01.aws.travisperkins.com:8080/'
-jenkins_url_cps = 'http://jenkins.pipe.cps.test01.aws.travisperkins.com:8080/'
+jenkins_url = 'http://jenkins.pipe.tp.test02.aws.travisperkins.com:8080/'
+jenkins_url_cps = 'http://jenkins.pipe.cps.test02.aws.travisperkins.com:8080/'
 
 jobs = [
     {
         'cipyPrettyName' : 'Unit Tests',
-        'url' : 'http://jenkins.pipe.cloudshop.test01.aws.travisperkins.com:8080/job/Cloudshop_Unit_Test_And_Sonar/',
+        'url' : 'http://jenkins.pipe.cloudshop.test02.aws.travisperkins.com:8080/job/Cloudshop_Unit_Test_And_Sonar/',
     },
     {
         'cipyPrettyName' : 'AAT TP prod',
