@@ -1,6 +1,8 @@
 cipyPort = 8005
 
-jenkins_url = 'http://jenkins.pipe.tpgp.test02.aws.travisperkins.com:8080/'
+tpgp_jenkins_url = 'http://jenkins.pipe.tpgp.test02.aws.travisperkins.com:8080/'
+tp_jenkins_url = 'http://jenkins.pipe.b2bhy62.test02.aws.travisperkins.com:8080/'
+cps_jenkins_url = 'http://jenkins.pipe.b2chy62.test02.aws.travisperkins.com:8080/'
 
 
 jobs = [
@@ -10,7 +12,7 @@ jobs = [
     },
     {
         'cipyPrettyName' : 'AAT TPGP',
-        'url' : jenkins_url + 'job/Cloudshop_Aat_MultiJob/',
+        'url' : tpgp_jenkins_url + 'job/Cloudshop_Aat_MultiJob/',
         'parameters': {'name': 'FEATURE_SET', 'value': 'prodfeatures'},
         'subBuilds': [
             {
@@ -35,26 +37,64 @@ jobs = [
     },
     {
         'cipyPrettyName' : 'SIT TPGP',
-        'url' : jenkins_url + 'job/Cloudshop_Sit_MultiJob/',
+        'url' : tpgp_jenkins_url + 'job/Cloudshop_Sit_MultiJob/',
+    },
+    {
+        'cipyPrettyName' : 'AAT TP',
+        'url' : tp_jenkins_url + 'job/Cloudshop_Aat_MultiJob/',
+        'parameters': {'name': 'FEATURE_SET', 'value': 'prodfeatures'},
         'subBuilds': [
             {
-                'cipyPrettyName': 'SIT Deploy',
+                'cipyPrettyName': 'AAT Deploy',
                 'jobName': 'Cloudshop_Deploy',
             },
             {
-                'cipyPrettyName': 'SIT BDD',
+                'cipyPrettyName': 'AAT BDD',
                 'jobName': 'Cloudshop_Bdd',
                 'phase': 'Parallel',
             },
             {
-                'cipyPrettyName': 'SIT BDD Serial',
+                'cipyPrettyName': 'AAT BDD Serial',
                 'jobName': 'Cloudshop_Bdd',
                 'phase': 'Serial',
             },
             {
-                'cipyPrettyName': 'SIT UI Tests',
+                'cipyPrettyName': 'AAT UI Tests',
                 'jobName':'Cloudshop_Ui_MultiJob',
             },
         ]
+    },
+    {
+        'cipyPrettyName' : 'SIT TP',
+        'url' : tp_jenkins_url + 'job/Cloudshop_Sit_MultiJob/',
+    },
+    {
+        'cipyPrettyName' : 'AAT CPS',
+        'url' : cps_jenkins_url + 'job/Cloudshop_Aat_MultiJob/',
+        'parameters': {'name': 'FEATURE_SET', 'value': 'prodfeatures'},
+        'subBuilds': [
+            {
+                'cipyPrettyName': 'AAT Deploy',
+                'jobName': 'Cloudshop_Deploy',
+            },
+            {
+                'cipyPrettyName': 'AAT BDD',
+                'jobName': 'Cloudshop_Bdd',
+                'phase': 'Parallel',
+            },
+            {
+                'cipyPrettyName': 'AAT BDD Serial',
+                'jobName': 'Cloudshop_Bdd',
+                'phase': 'Serial',
+            },
+            {
+                'cipyPrettyName': 'AAT UI Tests',
+                'jobName':'Cloudshop_Ui_MultiJob',
+            },
+        ]
+    },
+    {
+        'cipyPrettyName' : 'SIT CPS',
+        'url' : cps_jenkins_url + 'job/Cloudshop_Sit_MultiJob/',
     },
 ]
