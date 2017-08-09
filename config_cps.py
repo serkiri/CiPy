@@ -1,6 +1,6 @@
 cipyPort = 8001
 
-jenkins_url = 'http://jenkins.pipe.cps.test02.aws.travisperkins.com:8080/'
+jenkins_url = 'http://jenkins.pipe.cps01.test02.aws.travisperkins.com:8080/'
 
 jobs = [
     {
