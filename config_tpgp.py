@@ -1,8 +1,8 @@
 cipyPort = 8005
 
 tpgp_jenkins_url = 'http://jenkins.pipe.tpgp.test02.aws.travisperkins.com:8080/'
-tp_jenkins_url = 'http://jenkins.pipe.b2bhy62.test02.aws.travisperkins.com:8080/'
-cps_jenkins_url = 'http://jenkins.pipe.b2chy62.test02.aws.travisperkins.com:8080/'
+tp_jenkins_url = 'http://jenkins.pipe.tp01.test02.aws.travisperkins.com:8080/'
+cps_jenkins_url = 'http://jenkins.pipe.cps01.test02.aws.travisperkins.com:8080/'
 
 
 jobs = [
