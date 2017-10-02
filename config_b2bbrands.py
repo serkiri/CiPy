@@ -38,22 +38,6 @@ jobs = [
     {
         'cipyPrettyName' : 'SIT BMX',
         'url' : jenkins_url_bmx + 'job/Cloudshop_Sit_MultiJob/',
-        'subBuilds': [
-            {
-                'cipyPrettyName': 'SIT Deploy',
-                'jobName': 'Cloudshop_Deploy',
-            },
-            {
-                'cipyPrettyName': 'SIT BDD',
-                'jobName': 'Cloudshop_Bdd',
-                'phase': 'Parallel',
-            },
-            {
-                'cipyPrettyName': 'SIT BDD Serial',
-                'jobName': 'Cloudshop_Bdd',
-                'phase': 'Serial',
-            },
-        ]
     },
     {
         'cipyPrettyName' : 'AAT CCF prod',
@@ -83,22 +67,6 @@ jobs = [
     {
         'cipyPrettyName' : 'SIT CCF',
         'url' : jenkins_url_ccf + 'job/Cloudshop_Sit_MultiJob/',
-        'subBuilds': [
-            {
-                'cipyPrettyName': 'SIT Deploy',
-                'jobName': 'Cloudshop_Deploy',
-            },
-            {
-                'cipyPrettyName': 'SIT BDD',
-                'jobName': 'Cloudshop_Bdd',
-                'phase': 'Parallel',
-            },
-            {
-                'cipyPrettyName': 'SIT BDD Serial',
-                'jobName': 'Cloudshop_Bdd',
-                'phase': 'Serial',
-            },
-        ]
     },
     {
         'cipyPrettyName' : 'AAT KL prod',
@@ -128,22 +96,6 @@ jobs = [
     {
         'cipyPrettyName' : 'SIT KL',
         'url' : jenkins_url_kl + 'job/Cloudshop_Sit_MultiJob/',
-        'subBuilds': [
-            {
-                'cipyPrettyName': 'SIT Deploy',
-                'jobName': 'Cloudshop_Deploy',
-            },
-            {
-                'cipyPrettyName': 'SIT BDD',
-                'jobName': 'Cloudshop_Bdd',
-                'phase': 'Parallel',
-            },
-            {
-                'cipyPrettyName': 'SIT BDD Serial',
-                'jobName': 'Cloudshop_Bdd',
-                'phase': 'Serial',
-            },
-        ]
     },
 
 ]
