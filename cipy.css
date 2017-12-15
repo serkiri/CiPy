@@ -14,7 +14,7 @@ body:after {
     left: -48px;
     bottom: 0px;
     z-index: 100;
-#    background: url(http://www.netanimations.net/Animated_Xmas_tree-animation.gif) 0 0 no-repeat transparent;
+    background: url(http://www.netanimations.net/Animated_Xmas_tree-animation.gif) 0 0 no-repeat transparent;
     background-size: 350px 350px;
 }
 
